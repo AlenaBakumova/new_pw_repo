@@ -32,8 +32,9 @@ module.exports = defineConfig({
       username: 'guest',
       password: 'welcome2qauto'
     },
+    headless: false,
     viewport: { width: 1920, height: 1080 },
-    screenshot: 'only-on-failed',
+    screenshoot: 'only-on-failed',
     //video: 'on',
     //* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
