@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+require('dotenv').config(); // .env
 
 function generateRandomEmail(prefix) {
   const randomString = Math.random().toString(36).substring(2, 10);
@@ -7,12 +8,12 @@ function generateRandomEmail(prefix) {
 
 test.describe('User Registration', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto(process.env.BASE_URL); // // .env baseURL 
     await page.click('button.hero-descriptor_btn.btn.btn-primary:has-text("Sign up")');
   });
 
   test('Positive scenario: Successful page load', async ({ page }) => {
-    await expect(page).toHaveURL('https://qauto2.forstudy.space/register');
+    await expect(page).toHaveURL(`${process.env.BASE_URL}/register`);
   });
 
   test.describe('Field: Name', () => {
@@ -109,7 +110,6 @@ test.describe('User Registration', () => {
       test(`Negative scenario: Email "${email}"`, async ({ page }) => {
         const randomName = 'John';
         const randomLastName = 'Smith';
-        const randomEmail = generateRandomEmail('aqa');
 
         await page.fill('input[name="name"].ng-untouched.ng-pristine.ng-invalid', randomName);
         await page.fill('input[name="lastName"].form-control', randomLastName);
@@ -223,3 +223,4 @@ test.describe('User Registration', () => {
     }
   });
 });
+
