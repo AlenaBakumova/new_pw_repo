@@ -1,0 +1,18 @@
+# Node modules
+node_modules/
+
+# Playwright test results and reports
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# macOS specific files
+.DS_Store
+
+
+# .env
+.env
+
+# временные файлы
+*.log

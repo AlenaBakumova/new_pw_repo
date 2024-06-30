@@ -1,7 +1,6 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
-
-//якщо честно дуже багато було проблем з клонуванням
+require('dotenv').config();  //  .env 
 
 /**
  * Read environment variables from file.
@@ -13,29 +12,29 @@ const { defineConfig, devices } = require('@playwright/test');
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
-  testDir: './tests', //запуск тестів з папки ...
+  testDir: './tests', // запуск тестів з папки ...
   /* Run tests in files in parallel */
-  fullyParallel: true, //паралельні рани
+  fullyParallel: true, // паралельні рани
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0, //переранити декілька разів
+  retries: process.env.CI ? 2 : 0, // переранити декілька разів
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined, //також до паралельних ранів відноситься
+  workers: process.env.CI ? 1 : undefined, // також до паралельних ранів відноситься
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', {open: 'never'}]],
-  // open: 'never' - не відкривати репорт автоматично (варіанти on-failer, always,never)
+  reporter: [['html', { open: 'never' }]], 
+  // open: 'never' - не відкривати репорт автоматично (варіанти on-failer, always, never)
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'https://qauto2.forstudy.space/',
+    baseURL: process.env.BASE_URL, //  .env 
     httpCredentials: {
-      username: 'guest',
-      password: 'welcome2qauto'
+      username: process.env.USERNAME,  //  .env 
+      password: process.env.PASSWORD   //  .env 
     },
     headless: false,
     viewport: { width: 1920, height: 1080 },
     screenshoot: 'only-on-failed',
-    //video: 'on',
+    // video: 'on',
     //* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
@@ -87,6 +86,6 @@ module.exports = defineConfig({
   //   url: 'http://127.0.0.1:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
-
 });
+
 
