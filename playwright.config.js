@@ -12,6 +12,7 @@ require('dotenv').config();  //  .env
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
+  globalSetup: require.resolve('./setup.js'),
   testDir: './tests', // запуск тестів з папки ...
   /* Run tests in files in parallel */
   fullyParallel: true, // паралельні рани
@@ -44,6 +45,10 @@ module.exports = defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.js/,
+    },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -88,4 +93,5 @@ module.exports = defineConfig({
   // },
 });
 
-.
+
+
