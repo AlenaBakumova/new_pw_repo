@@ -33,7 +33,7 @@ module.exports = defineConfig({
     },
     headless: false,
     viewport: { width: 1920, height: 1080 },
-    screenshoot: 'only-on-failed',
+    screenshot: 'only-on-failure',
     // video: 'on',
     //* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
@@ -45,20 +45,41 @@ module.exports = defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'UI Tests',
+      use: {
+        baseURL: process.env.BASE_URL_UI,
+        httpCredentials: {
+          username: process.env.USERNAME,
+          password: process.env.PASSWORD,
+        },
+        ...devices['Desktop Chrome'],
+      },
+    },
+    {
+      name: 'API Tests',
+      use: {
+        baseURL: process.env.BASE_URL_API,
+        extraHTTPHeaders: {
+          'Content-Type': 'application/json',
+        },
+        httpCredentials: {
+          username: process.env.API_USERNAME,
+          password: process.env.API_PASSWORD,
+        },
+      },
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-
-    {
+    /* {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
@@ -68,7 +89,6 @@ module.exports = defineConfig({
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },
     // },
-
     /* Test against branded browsers. */
     // {
     //   name: 'Microsoft Edge',
@@ -87,5 +107,3 @@ module.exports = defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-
-.
