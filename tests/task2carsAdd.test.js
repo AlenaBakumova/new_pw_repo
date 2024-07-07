@@ -5,7 +5,6 @@ test.describe('API Tests for Car Creation', () => {
   let loggedInCookie;
 
   test.beforeAll(async () => {
-
     const browser = await Playwright.chromium.launch();
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -15,7 +14,6 @@ test.describe('API Tests for Car Creation', () => {
     await page.fill('input[name="password"]', process.env.PASSWORD);
     await page.click('button[type="submit"]');
     
-  
     const cookies = await context.cookies();
     loggedInCookie = cookies.find(cookie => cookie.name === 'your_login_cookie_name');
 
